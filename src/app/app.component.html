@@ -12,21 +12,15 @@
 
   <h2 class="h4">Catalogue</h2>
 
-  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
-    <div class="col">
-      <!-- Extract to "src/app/product/product.component.html" -->
-      <app-product [product]="products[0]" (addToBasket)="onAddToBasket($event)"></app-product>
-      <!-- End of Extract to "src/app/product/product.component.html" -->
-    </div>
-    <div class="col">
-      <app-product [product]="products[1]" (addToBasket)="onAddToBasket($event)"></app-product>
-    </div>
-    <div class="col">
-      <app-product [product]="products[2]" (addToBasket)="onAddToBasket($event)"></app-product>
-    </div>
-    <div class="col">
-      <app-product [product]="products[3]" (addToBasket)="onAddToBasket($event)"></app-product>
-    </div>
+  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4" *ngIf="hasProductsInStock; else noStock">
+      <ng-container *ngFor="let product of products">
+        <div class="col" *ngIf="product.stock > 0">
+          <!-- Extract to "src/app/product/product.component.html" -->
+          <app-product [product]="product" (addToBasket)="addToBasket($event)"></app-product>
+          <!-- End of Extract to "src/app/product/product.component.html" -->
+        </div>
+      </ng-container>
   </div>
+  <ng-template #noStock>Désolé, notre stock est vide !</ng-template>
 </main>
 <!-- End of Extract to "src/app/app.component.html" -->

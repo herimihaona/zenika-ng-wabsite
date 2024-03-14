@@ -16,7 +16,7 @@ export class AppComponent {
       "description": "Tee-shirt col rond - Homme",
       "photo": "/assets/coding-the-welsch.jpg",
       "price": 20,
-      "stock": 2
+      "stock": 0
     },
     {
       "id": "world",
@@ -24,7 +24,7 @@ export class AppComponent {
       "description": "Tee-shirt col rond - Homme",
       "photo": "/assets/coding-the-world.jpg",
       "price": 18,
-      "stock": 2
+      "stock": 0
     },
     {
       "id": "vador",
@@ -32,7 +32,7 @@ export class AppComponent {
       "description": "Tee-shirt col rond - Femme",
       "photo": "/assets/coding-the-stars.jpg",
       "price": 21,
-      "stock": 2
+      "stock": 0
     },
     {
       "id": "snow",
@@ -40,11 +40,15 @@ export class AppComponent {
       "description": "Tee-shirt col rond - Femme",
       "photo": "/assets/coding-the-snow.jpg",
       "price": 19,
-      "stock": 2
+      "stock": 0
     }
   ];
 
-  onAddToBasket(product:Product) { 
+  addToBasket(product:Product) { 
     this.total += product.price;
+  }
+
+  get hasProductsInStock(): boolean {
+    return this.products.some(product => product.stock > 0);
   }
 }
