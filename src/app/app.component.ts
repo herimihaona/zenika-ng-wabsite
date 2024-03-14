@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { Product } from './product/product.type';
+import { CatalogService } from './catalog/catalog.service';
+import { BasketService } from './basket/basket.service';
 
 @Component({
   selector: 'app-root',
@@ -7,48 +9,26 @@ import { Product } from './product/product.type';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  total = 0;
   title = 'my first component';
-  products: Product[] = [
-    {
-      "id": "welsch",
-      "title": "Coding the welsch",
-      "description": "Tee-shirt col rond - Homme",
-      "photo": "/assets/coding-the-welsch.jpg",
-      "price": 20,
-      "stock": 0
-    },
-    {
-      "id": "world",
-      "title": "Coding the world",
-      "description": "Tee-shirt col rond - Homme",
-      "photo": "/assets/coding-the-world.jpg",
-      "price": 18,
-      "stock": 0
-    },
-    {
-      "id": "vador",
-      "title": "Duck Vador",
-      "description": "Tee-shirt col rond - Femme",
-      "photo": "/assets/coding-the-stars.jpg",
-      "price": 21,
-      "stock": 0
-    },
-    {
-      "id": "snow",
-      "title": "Coding the snow",
-      "description": "Tee-shirt col rond - Femme",
-      "photo": "/assets/coding-the-snow.jpg",
-      "price": 19,
-      "stock": 0
-    }
-  ];
+  
+  constructor(public catalogService: CatalogService, private basketService: BasketService) {
+
+  }
 
   addToBasket(product:Product) { 
-    this.total += product.price;
+    this.catalogService.decreaseStock(product.id);
+    this.basketService.addItem(product);
+  }
+
+  get total():number {
+    return this.basketService.total;
+  }
+
+  get products() {
+    return this.catalogService.products;
   }
 
   get hasProductsInStock(): boolean {
-    return this.products.some(product => product.stock > 0);
+    return this.catalogService.hasProductsInStock;
   }
 }

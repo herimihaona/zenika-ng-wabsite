@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { BasketService } from '../basket/basket.service';
 
 @Component({
   selector: 'app-menu',
@@ -6,5 +7,13 @@ import { Component } from '@angular/core';
   styleUrl: './menu.component.css'
 })
 export class MenuComponent {
+
+  numberOfItemsInBasket: number = 0;
+
+  constructor(private basketService: BasketService) { }
+
+  get basketSize() {
+    return this.basketService.items.length;
+  }
 
 }
