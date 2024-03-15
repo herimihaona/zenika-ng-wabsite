@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { Product } from '../product/product.type';
 
 @Injectable({
@@ -12,10 +12,12 @@ export class CatalogService {
 
   constructor(private http: HttpClient) { }
 
-  fetchProducts(): void {
-    this.http.get<Product[]>('http://localhost:8080/api/products').subscribe((products: Product[]) => {
-      this._products = products;
-    });
+  fetchProducts(): Observable<Product[]> {
+    return this.http.get<Product[]>('http://localhost:8080/api/products').pipe(
+      tap((products:Product[])=>{
+        this._products = products;
+      })
+    )
   }
 
   get products(): Product[] {

@@ -15,17 +15,18 @@ export class AppComponent {
   constructor(public catalogService: CatalogService, private basketService: BasketService) {
 
   }
-  
+
   ngOnInit(): void {
-    this.catalogService.fetchProducts();
+    this.catalogService.fetchProducts().subscribe();
   }
 
-  addToBasket(product:Product) { 
-    this.catalogService.decreaseStock(product.id);
-    this.basketService.addItem(product.id);
+  addToBasket(product: Product) {
+    this.basketService.addItem(product.id).subscribe((addedItem) => {
+      this.catalogService.decreaseStock(product.id);
+    });
   }
 
-  get total():number {
+  get total(): number {
     return this.basketService.total;
   }
 
