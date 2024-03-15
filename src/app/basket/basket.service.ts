@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { filter, Observable, tap } from 'rxjs';
+import { Product } from '../product/product.type';
 import { BasketItem } from './basket.types';
 
 @Injectable({
@@ -26,5 +27,13 @@ export class BasketService {
         this._items.push(newBasketItem);
       })
     );
+  }
+
+  fetchBasket(): Observable<BasketItem[]> {
+    return this.http.get<Product[]>('http://localhost:8080/api/basket').pipe(
+      tap((basketItems:BasketItem[])=>{
+        this._items = basketItems;
+      })
+    )
   }
 }

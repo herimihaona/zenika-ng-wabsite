@@ -10,6 +10,10 @@ import localFr from '@angular/common/locales/fr';
 import { SortProductsPipe } from './sort-products/sort-products.pipe'
 import { SelectProductKeyComponent } from './select-product-key/select-product-key.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { CatalogComponent } from './catalog/catalog.component';
+import { BasketComponent } from './basket/basket.component';
+import { ProductDetailsComponent } from './product-details/product-details.component';
+import { BasketEmptyComponent } from './basket-empty/basket-empty.component';
 
 registerLocaleData(localFr);
 
@@ -19,7 +23,11 @@ registerLocaleData(localFr);
     MenuComponent,
     ProductComponent,
     SortProductsPipe,
-    SelectProductKeyComponent
+    SelectProductKeyComponent,
+    CatalogComponent,
+    BasketComponent,
+    ProductDetailsComponent,
+    BasketEmptyComponent,
   ],
   imports: [
     BrowserModule,
