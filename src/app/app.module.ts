@@ -9,6 +9,7 @@ import { registerLocaleData } from '@angular/common';
 import localFr from '@angular/common/locales/fr';
 import { SortProductsPipe } from './sort-products/sort-products.pipe'
 import { SelectProductKeyComponent } from './select-product-key/select-product-key.component';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 registerLocaleData(localFr);
 
@@ -22,7 +23,8 @@ registerLocaleData(localFr);
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [
     {provide: LOCALE_ID, useValue: 'Fr'},

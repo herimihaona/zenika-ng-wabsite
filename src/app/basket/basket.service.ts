@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BasketItem } from './basket.types';
 
@@ -8,7 +9,7 @@ export class BasketService {
 
   private _items:BasketItem[] = [];
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   get items(): BasketItem[] {
     return this._items;
@@ -18,7 +19,11 @@ export class BasketService {
     return this._items.reduce((total, item) => total + item.price, 0);
   }
 
-  addItem(item: BasketItem): void {
-    this._items.push(item);
+  addItem(productId: string): void {
+    this.http.post<BasketItem>('http://localhost:8080/api/basket', {productId}).subscribe(
+      (item) => {
+        this._items.push(item);
+      }
+    )
   }
 }
