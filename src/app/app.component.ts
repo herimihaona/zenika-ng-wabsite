@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Product } from './product/product.type';
 import { CatalogService } from './catalog/catalog.service';
 import { BasketService } from './basket/basket.service';
+import { SelectProductKey } from './select-product-key/select-product-key.types';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +11,7 @@ import { BasketService } from './basket/basket.service';
 })
 export class AppComponent {
   title = 'my first component';
-  
+  productKey: SelectProductKey = undefined
   constructor(public catalogService: CatalogService, private basketService: BasketService) {
 
   }

@@ -8,6 +8,7 @@ import { ProductComponent } from './product/product.component';
 import { registerLocaleData } from '@angular/common';
 import localFr from '@angular/common/locales/fr';
 import { SortProductsPipe } from './sort-products/sort-products.pipe'
+import { SelectProductKeyComponent } from './select-product-key/select-product-key.component';
 
 registerLocaleData(localFr);
 
@@ -16,7 +17,8 @@ registerLocaleData(localFr);
     AppComponent,
     MenuComponent,
     ProductComponent,
-    SortProductsPipe
+    SortProductsPipe,
+    SelectProductKeyComponent
   ],
   imports: [
     BrowserModule,
